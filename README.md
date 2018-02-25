@@ -6,7 +6,7 @@ Docker Composer Setup
 ## How to use:
 
 0. - Install [Docker and Docker Compose](https://www.docker.com/community-edition) for your OS. 
-> If using Minikube, ensure that the kube VM has at least 6GB RAM.
+    
    + For Windows OS without Hyper-V Capability
      + Install Docker toolbox (https://docs.docker.com/toolbox/toolbox_install_windows/)
      + Once installed you might need to remove the line `"credsStore": "wincred"` from `~/.docker/config.json`
@@ -26,7 +26,7 @@ $ docker-compose up -d
 $ docker-compose exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 ```
 
-4. Congratulations, you may now login access Jenkins with the Blue Ocean UI at http://0.0.0.0:8080/ or https://0.0.0.0:8443/ (or whatever your Docker Machine IP is).
+4. Open Jenkins in your browser by going to either http://0.0.0.0:8080/ or https://0.0.0.0:8443/ (or whatever your Docker Machine IP is).
 
 5. Enter your initial admin password when the setup wizard asks you to.
 
@@ -46,6 +46,8 @@ $ docker-compose exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 
 ![Blue Ocean](images/jenkins-blue-ocean.png)
 
+> Congratulations! You may now use Jenkins with the Blue Ocean UI and the Jenkins Pipelines of 2.0
+
 ## Troubleshooting
 
 #### Mounted volumes are empty
@@ -55,12 +57,6 @@ This guide is for:
 (You may check out the system requirements [here](https://docs.docker.com/docker-for-windows/install/#what-to-know-before-you-install))
 - Uses __Docker Toolbox__
 - Uses __Virtualbox__ for virtualization
-
-When running 
-```sh
-docker-compose run web bin/post-deploy
-```
-You might encounter an error where it says that `bin/post-deploy` is not found. The problem is caused by your current working directory not being properly shared in the VM. Which in turn cannot be accessed by the container created by `docker-compose`.
 
 _Note: We will assume that your current working directory is at `D:\Projects\Jenkins`_
 _Note: All commands are executed inside the __Docker Quickstart Terminal___
@@ -95,5 +91,4 @@ Now your containers should have access to your current folder.
 
 ### NOTES
 - When setting up the `Folder Name` in the VM settings, assure that it's a valid linux path and must be relative to `/` (root) directory (eg `e/projects`).
-- The directory that contains `jenkins` **must not contain** any whitespaces or any characters that must be escaped. (e.g `F19 Source Code`, `Source\ Code`) The reason is that it'll serve as a `Folder Name` in your VM settings, and you cannot click OK when you do supply such names. 
-- Running containers or "containers" in production are called "services"
+- The directory that contains `jenkins` **must not contain** any whitespaces or any characters that must be escaped. (e.g `F19 Source Code`, `Source\ Code`) The reason is that it'll serve as a `Folder Name` in your VM settings, and you cannot click OK when you do supply such names.
